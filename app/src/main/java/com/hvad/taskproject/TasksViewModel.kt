@@ -19,7 +19,6 @@ class TasksViewModel (val dao: TaskDao): ViewModel() {
             val task = Task()
             task.taskName= newTaskName
             dao.insert(task)
-            newTaskName=""
         }
 
 

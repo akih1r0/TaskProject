@@ -3,31 +3,33 @@ package com.hvad.taskproject
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.hvad.taskproject.databinding.TaskItemBinding
 
-class TaskItemAdapter: RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
-    var data= listOf<Task>()
-        set(value){
-            field= value
-            notifyDataSetChanged()
-        }
+class TaskItemAdapter: ListAdapter<Task, TaskItemAdapter.ViewHolder>(TaskDiffItemCallback()) {
+//    var data= listOf<Task>()
+//        set(value){
+//            field= value
+//            notifyDataSetChanged()
+//        }
 
-    class ViewHolder(val rootView: CardView): RecyclerView.ViewHolder(rootView){
-        val taskName= rootView.findViewById<TextView>(R.id.task_name)
-        val taskDone= rootView.findViewById<CheckBox>(R.id.task_done)
+    class ViewHolder(val binding: TaskItemBinding): RecyclerView.ViewHolder(binding.root){
+//        val taskName= rootView.findViewById<TextView>(R.id.task_name)
+//        val taskDone= rootView.findViewById<CheckBox>(R.id.task_done)
         companion object{
             fun inflateFrom(parent: ViewGroup): ViewHolder{
                 val layoutInflater=LayoutInflater.from(parent.context)
-                val view =layoutInflater.inflate(R.layout.task_item, parent, false) as CardView
-                return ViewHolder(view)
+                //val view =layoutInflater.inflate(R.layout.task_item, parent, false) as CardView
+                val binding= TaskItemBinding.inflate(layoutInflater, parent,false)
+                return ViewHolder(binding)
             }
         }
         fun bind(item: Task){
-            taskName.text=item.taskName
-            taskDone.isChecked=item.taskDone
+            binding.task=item
         }
     }
 
@@ -77,7 +79,7 @@ class TaskItemAdapter: RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: TaskItemAdapter.ViewHolder, position: Int) {
-        val item= data[position]
+        val item= /*data[position]*/ getItem(position)
         holder.bind(item)
     }
 
@@ -86,9 +88,9 @@ class TaskItemAdapter: RecyclerView.Adapter<TaskItemAdapter.ViewHolder>() {
      *
      * @return The total number of items in this adapter.
      */
-    override fun getItemCount(): Int {
-        return data.size
-    }
+//    override fun getItemCount(): Int {
+//        return data.size
+//    }
 
 
 }
