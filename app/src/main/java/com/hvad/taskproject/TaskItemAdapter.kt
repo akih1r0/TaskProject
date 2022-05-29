@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.hvad.taskproject.databinding.TaskItemBinding
+import com.hvad.taskproject.generated.callback.OnClickListener
 
-class TaskItemAdapter: ListAdapter<Task, TaskItemAdapter.ViewHolder>(TaskDiffItemCallback()) {
+class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit): ListAdapter<Task, TaskItemAdapter.ViewHolder>(TaskDiffItemCallback()) {
 //    var data= listOf<Task>()
 //        set(value){
 //            field= value
@@ -28,8 +30,11 @@ class TaskItemAdapter: ListAdapter<Task, TaskItemAdapter.ViewHolder>(TaskDiffIte
                 return ViewHolder(binding)
             }
         }
-        fun bind(item: Task){
+        fun bind(item: Task, clickListener: (taskId: Long) -> Unit){
             binding.task=item
+            binding.root.setOnClickListener{
+                clickListener(item.taskId)
+            }
         }
     }
 
@@ -80,7 +85,7 @@ class TaskItemAdapter: ListAdapter<Task, TaskItemAdapter.ViewHolder>(TaskDiffIte
      */
     override fun onBindViewHolder(holder: TaskItemAdapter.ViewHolder, position: Int) {
         val item= /*data[position]*/ getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickListener)
     }
 
     /**
