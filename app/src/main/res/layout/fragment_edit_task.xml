@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.EditTaskFragment"
-    android:orientation="vertical"
-    android:padding="16dp">
-    <TextView
+    tools:context=".view.EditTaskFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hvad.taskproject.viewmodel.EditTaskViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/task_id"
-        android:textSize="16sp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_name"
+            android:textSize="16sp"
+            android:inputType="text"
+            android:text="@={viewModel.task.taskName}"/>
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_done"
+            android:textSize="16sp"
+            android:text="@string/is_it_done"
+            android:checked="@={viewModel.task.taskDone}"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/update_button"
+            android:layout_gravity="center"
+            android:text="@string/update_task"
+            android:onClick="@{()->viewModel.updateTask()}"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/delete_button"
+            android:layout_gravity="center"
+            android:text="@string/delete_task"
+            android:onClick="@{()->viewModel.deleteTask()}"/>
 
 
 
 
-</LinearLayout>
+
+
+
+
+    </LinearLayout>
+</layout>
