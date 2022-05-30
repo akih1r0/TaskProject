@@ -1,14 +1,17 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.findNavController
+import com.hvad.taskproject.model.TaskDatabase
+import com.hvad.taskproject.viewmodel.TaskItemAdapter
+import com.hvad.taskproject.viewmodel.TasksViewModel
+import com.hvad.taskproject.viewmodel.TasksViewModelFactory
 import com.hvad.taskproject.databinding.FragmentTasksBinding
 
 
@@ -35,7 +38,8 @@ class TasksFragment : Fragment() {
 
         //RecyclerView
         val adapter= TaskItemAdapter{taskId ->
-            Toast.makeText(context, "Clicked task $taskId", Toast.LENGTH_SHORT).show()
+            viewModel.onTaskClicked(taskId)
+
         }
         binding.tasksList.adapter=adapter
 
@@ -43,6 +47,13 @@ class TasksFragment : Fragment() {
             it?.let {
 //                adapter.data=it
                 adapter.submitList(it)
+            }
+        })
+        viewModel.navigateToTask.observe(viewLifecycleOwner, Observer { taskId->
+            taskId?.let {
+                val action= TasksFragmentDirections.actionTasksFragmentToEditTaskFragment(taskId)
+                this.findNavController().navigate(action)
+                viewModel.onTaskNavigated()
             }
         })
 

@@ -1,8 +1,7 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import java.nio.channels.SelectableChannel
 
 @Dao
 interface TaskDao {
@@ -13,7 +12,7 @@ interface TaskDao {
     suspend fun insertAll(tasks: List<Task>)
 
     @Update
-    suspend fun update(task:Task)
+    suspend fun update(task: Task)
 
     @Delete
     suspend fun delete(task: Task)

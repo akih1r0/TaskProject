@@ -1,7 +1,8 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hvad.taskproject.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

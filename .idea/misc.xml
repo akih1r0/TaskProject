@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/KotlinCourse/TaskProject/app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
+        <entry key="..\:/KotlinCourse/TaskProject/app/src/main/res/layout/fragment_edit_task.xml" value="0.3625" />
         <entry key="..\:/KotlinCourse/TaskProject/app/src/main/res/layout/fragment_tasks.xml" value="0.5" />
         <entry key="..\:/KotlinCourse/TaskProject/app/src/main/res/layout/task_item.xml" value="0.3625" />
       </map>

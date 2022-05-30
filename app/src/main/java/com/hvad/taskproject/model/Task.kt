@@ -1,4 +1,4 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

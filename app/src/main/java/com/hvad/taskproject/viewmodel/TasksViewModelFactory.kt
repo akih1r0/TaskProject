@@ -1,7 +1,8 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.hvad.taskproject.model.TaskDao
 
 class TasksViewModelFactory(private val dao: TaskDao): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

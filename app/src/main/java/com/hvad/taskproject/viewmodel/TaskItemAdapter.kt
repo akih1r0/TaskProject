@@ -1,18 +1,15 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.viewmodel
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
-import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.hvad.taskproject.databinding.TaskItemBinding
-import com.hvad.taskproject.generated.callback.OnClickListener
+import com.hvad.taskproject.model.Task
 
-class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit): ListAdapter<Task, TaskItemAdapter.ViewHolder>(TaskDiffItemCallback()) {
+class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit): ListAdapter<Task, TaskItemAdapter.ViewHolder>(
+    TaskDiffItemCallback()
+) {
 //    var data= listOf<Task>()
 //        set(value){
 //            field= value
@@ -23,7 +20,7 @@ class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit): ListAdapter<Ta
 //        val taskName= rootView.findViewById<TextView>(R.id.task_name)
 //        val taskDone= rootView.findViewById<CheckBox>(R.id.task_done)
         companion object{
-            fun inflateFrom(parent: ViewGroup): ViewHolder{
+            fun inflateFrom(parent: ViewGroup): ViewHolder {
                 val layoutInflater=LayoutInflater.from(parent.context)
                 //val view =layoutInflater.inflate(R.layout.task_item, parent, false) as CardView
                 val binding= TaskItemBinding.inflate(layoutInflater, parent,false)
@@ -60,7 +57,8 @@ class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit): ListAdapter<Ta
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskItemAdapter.ViewHolder = ViewHolder.inflateFrom(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder.inflateFrom(parent)
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method should
@@ -83,7 +81,7 @@ class TaskItemAdapter(val clickListener: (taskId: Long) -> Unit): ListAdapter<Ta
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: TaskItemAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item= /*data[position]*/ getItem(position)
         holder.bind(item, clickListener)
     }

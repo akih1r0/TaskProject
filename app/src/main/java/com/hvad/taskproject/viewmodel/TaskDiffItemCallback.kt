@@ -1,6 +1,7 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.viewmodel
 
 import androidx.recyclerview.widget.DiffUtil
+import com.hvad.taskproject.model.Task
 
 class TaskDiffItemCallback: DiffUtil.ItemCallback<Task>() {
     /**

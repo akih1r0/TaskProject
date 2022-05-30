@@ -1,4 +1,4 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.model
 
 import android.content.Context
 import androidx.room.Database
@@ -13,9 +13,9 @@ abstract class TaskDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: TaskDatabase? = null
 
-        fun getInstance(context: Context): TaskDatabase{
+        fun getInstance(context: Context): TaskDatabase {
             synchronized(this){
-                var instance =INSTANCE
+                var instance = INSTANCE
                 if (instance==null)
                 {
                     instance= Room.databaseBuilder(
@@ -23,7 +23,7 @@ abstract class TaskDatabase: RoomDatabase() {
                         TaskDatabase::class.java,
                         "task_database"
                     ).build()
-                    INSTANCE=instance
+                    INSTANCE =instance
                 }
                 return  instance
             }

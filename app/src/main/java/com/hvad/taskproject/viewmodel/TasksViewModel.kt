@@ -1,13 +1,18 @@
-package com.hvad.taskproject
+package com.hvad.taskproject.viewmodel
 
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.hvad.taskproject.model.Task
+import com.hvad.taskproject.model.TaskDao
 import kotlinx.coroutines.launch
 
 class TasksViewModel (val dao: TaskDao): ViewModel() {
     var newTaskName=""
     val tasks= dao.getAll()
+
+
+    private val _navigateToTask= MutableLiveData<Long?>()
+    val navigateToTask: LiveData<Long?>
+    get() = _navigateToTask
 
     //Makes one big string out of String list
 //    val tasksString = Transformations.map(tasks){
@@ -22,6 +27,14 @@ class TasksViewModel (val dao: TaskDao): ViewModel() {
         }
 
 
+    }
+
+    fun onTaskClicked(taskId: Long){
+        _navigateToTask.value= taskId
+    }
+
+    fun onTaskNavigated(){
+        _navigateToTask.value=null
     }
 
 //    fun formatTasks(tasks: List<Task>):String {
